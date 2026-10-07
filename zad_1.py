@@ -1,4 +1,107 @@
 import csv
+#insertion sort - w3schools
+def insertionSort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+
+        arr[j + 1] = key
+    return arr
+
+def mediana(arr):
+    insertionSort(arr)
+    num = len(arr)
+    if num % 2 != 0:
+        return arr[(num-1)//2]
+    else:
+        return round((arr[(num-1)//2]+arr[num//2])/2, 2)
+
+def dolnyKwartyl(arr):
+    insertionSort(arr)
+    num = len(arr)
+    mid = num // 2
+    return mediana(arr[0:mid])
+
+def gornyKwartyl(arr):
+    insertionSort(arr)
+    num = len(arr)
+    mid = num // 2
+
+    if num %2 != 0:
+        start = mid + 1
+    else:
+        start = mid
+
+    return mediana(arr[start:])
+
+def odchylenie(lista):
+    n = len(lista)
+    if n < 2:
+        return 0.0
+    sr = sum(lista) / n
+    wariancja = sum((x - sr) ** 2 for x in lista) / (n - 1)
+    return round(wariancja**0.5, 2)
+
+def point2(arr):
+    # 1. Długość działki kielicha
+    print(" długość działki kielicha: ")
+    print(
+        f"minimum: {min(arr['Długość działki kielicha'])}, "
+        f"średnia arytmetyczna: {round(sum(arr['Długość działki kielicha']) / setosaTotal, 2)} "
+        f"(±{odchylenie(arr['Długość działki kielicha'])})"
+    )
+    print(
+        f"mediana: {mediana(arr['Długość działki kielicha'])}, "
+        f"dolny kwartyl: {dolnyKwartyl(arr['Długość działki kielicha'])}, "
+        f"gorny kwartyl: {gornyKwartyl(arr['Długość działki kielicha'])}, "
+        f"maximum: {max(arr['Długość działki kielicha'])}\n"
+    )
+
+    # 2. Szerokość działki kielicha
+    print(" szerokość działki kielicha: ")
+    print(
+        f"minimum: {min(arr['Szerokość działki kielicha'])}, "
+        f"średnia arytmetyczna: {round(sum(arr['Szerokość działki kielicha']) / setosaTotal, 2)} "
+        f"(±{odchylenie(arr['Szerokość działki kielicha'])})"
+    )
+    print(
+        f"mediana: {mediana(arr['Szerokość działki kielicha'])}, "
+        f"dolny kwartyl: {dolnyKwartyl(arr['Szerokość działki kielicha'])}, "
+        f"gorny kwartyl: {gornyKwartyl(arr['Szerokość działki kielicha'])}, "
+        f"maximum: {max(arr['Szerokość działki kielicha'])}\n"
+    )
+
+    # 3. Długość płatka
+    print(" długość płatka: ")
+    print(
+        f"minimum: {min(arr['Długość płatka'])}, "
+        f"średnia arytmetyczna: {round(sum(arr['Długość płatka']) / setosaTotal, 2)} "
+        f"(±{odchylenie(arr['Długość płatka'])})"
+    )
+    print(
+        f"mediana: {mediana(arr['Długość płatka'])}, "
+        f"dolny kwartyl: {dolnyKwartyl(arr['Długość płatka'])}, "
+        f"gorny kwartyl: {gornyKwartyl(arr['Długość płatka'])}, "
+        f"maximum: {max(arr['Długość płatka'])}\n"
+    )
+
+    # 4. Szerokość płatka
+    print(" szerokość płatka: ")
+    print(
+        f"minimum: {min(arr['Szerokość płatka'])}, "
+        f"średnia arytmetyczna: {round(sum(arr['Szerokość płatka']) / setosaTotal, 2)} "
+        f"(±{odchylenie(arr['Szerokość płatka'])})"
+    )
+    print(
+        f"mediana: {mediana(arr['Szerokość płatka'])}, "
+        f"dolny kwartyl: {dolnyKwartyl(arr['Szerokość płatka'])}, "
+        f"gorny kwartyl: {gornyKwartyl(arr['Szerokość płatka'])}, "
+        f"maximum: {max(arr['Szerokość płatka'])}\n"
+    )
 
 # pkt 1
 flowersInTotal = 150
@@ -58,3 +161,18 @@ virginicaProcent = round(virginicaTotal / flowersInTotal * 100, 1)
 print("")
 print(f"Liczebności: Setosa: {setosaTotal}, Versicolor: {versicolorTotal}, Virginica: {virginicaTotal}")
 print(f"Udzialy (%): Setosa: {setosaProcent}%, Versicolor: {versicolorProcent}%, Virginica: {virginicaProcent}%")
+print(" ")
+
+#pkt 2
+print("dane dla setosa: ")
+point2(setosaData)
+print(" ")
+
+print("dane dla versicolor:")
+point2(versicolorData)
+print(" ")
+
+print("dane dla virginica:")
+point2(virginicaData)
+print(" ")
+
