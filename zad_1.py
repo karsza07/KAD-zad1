@@ -46,12 +46,12 @@ def odchylenie(lista):
     wariancja = sum((x - sr) ** 2 for x in lista) / (n - 1)
     return round(wariancja**0.5, 2)
 
-def point2(arr):
+def point2(arr, total):
     # 1. Długość działki kielicha
     print(" długość działki kielicha: ")
     print(
         f"minimum: {min(arr['Długość działki kielicha'])}, "
-        f"średnia arytmetyczna: {round(sum(arr['Długość działki kielicha']) / setosaTotal, 2)} "
+        f"średnia arytmetyczna: {round(sum(arr['Długość działki kielicha']) / total, 2)} "
         f"(±{odchylenie(arr['Długość działki kielicha'])})"
     )
     print(
@@ -65,7 +65,7 @@ def point2(arr):
     print(" szerokość działki kielicha: ")
     print(
         f"minimum: {min(arr['Szerokość działki kielicha'])}, "
-        f"średnia arytmetyczna: {round(sum(arr['Szerokość działki kielicha']) / setosaTotal, 2)} "
+        f"średnia arytmetyczna: {round(sum(arr['Szerokość działki kielicha']) / total, 2)} "
         f"(±{odchylenie(arr['Szerokość działki kielicha'])})"
     )
     print(
@@ -79,7 +79,7 @@ def point2(arr):
     print(" długość płatka: ")
     print(
         f"minimum: {min(arr['Długość płatka'])}, "
-        f"średnia arytmetyczna: {round(sum(arr['Długość płatka']) / setosaTotal, 2)} "
+        f"średnia arytmetyczna: {round(sum(arr['Długość płatka']) / total, 2)} "
         f"(±{odchylenie(arr['Długość płatka'])})"
     )
     print(
@@ -93,7 +93,7 @@ def point2(arr):
     print(" szerokość płatka: ")
     print(
         f"minimum: {min(arr['Szerokość płatka'])}, "
-        f"średnia arytmetyczna: {round(sum(arr['Szerokość płatka']) / setosaTotal, 2)} "
+        f"średnia arytmetyczna: {round(sum(arr['Szerokość płatka']) / total, 2)} "
         f"(±{odchylenie(arr['Szerokość płatka'])})"
     )
     print(
@@ -164,15 +164,29 @@ print(f"Udzialy (%): Setosa: {setosaProcent}%, Versicolor: {versicolorProcent}%,
 print(" ")
 
 #pkt 2
-print("dane dla setosa: ")
-point2(setosaData)
-print(" ")
+allData = {
+    "Długość działki kielicha": (
+            setosaData["Długość działki kielicha"]
+            + versicolorData["Długość działki kielicha"]
+            + virginicaData["Długość działki kielicha"]
+    ),
+    "Szerokość działki kielicha": (
+            setosaData["Szerokość działki kielicha"]
+            + versicolorData["Szerokość działki kielicha"]
+            + virginicaData["Szerokość działki kielicha"]
+    ),
+    "Długość płatka": (
+            setosaData["Długość płatka"]
+            + versicolorData["Długość płatka"]
+            + virginicaData["Długość płatka"]
+    ),
+    "Szerokość płatka": (
+            setosaData["Szerokość płatka"]
+            + versicolorData["Szerokość płatka"]
+            + virginicaData["Szerokość płatka"]
+    ),
+}
 
-print("dane dla versicolor:")
-point2(versicolorData)
-print(" ")
-
-print("dane dla virginica:")
-point2(virginicaData)
-print(" ")
+print("dane łącznie dla wszystkich gatunków:")
+point2(allData, flowersInTotal)
 
