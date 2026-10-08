@@ -1,4 +1,6 @@
 import csv
+import matplotlib.pyplot as plt
+
 #insertion sort - w3schools
 def insertionSort(arr):
     for i in range(1, len(arr)):
@@ -190,3 +192,14 @@ allData = {
 print("dane łącznie dla wszystkich gatunków:")
 point2(allData, flowersInTotal)
 
+#zad3
+
+#długośc działki kielicha histogram dla awszystkich kwiatów
+dane = allData["Długość działki kielicha"]
+bins = [4.0, 4.4, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0] #podziałka osi x
+plt.xlabel("Długość  (cm)")
+plt.ylabel("liczebność")
+plt.ylim(0, 36) #zakres osi y
+plt.title("Długość działki kielicha")
+plt.hist(dane, bins, histtype='bar', edgecolor='black') # typ histogramu dane i kolor obwodu słupków
+plt.show()
