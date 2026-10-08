@@ -221,3 +221,13 @@ plt.title("długość płatka")
 plt.hist(dane, bins, histtype='bar', edgecolor='black') # typ histogramu dane i kolor obwodu słupków
 plt.ylim(0, 30) #zakres osi y
 plt.show()
+
+dane = allData["Szerokość płatka"]
+bins = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6] #podziałka osi x wyznaczona metoda prob i błędów poki nie znaleziono najlepszej reprezentacji danych
+plt.xlabel("szerokość (cm)")
+plt.ylabel("liczebność")
+plt.title("szerokość płatka")
+plt.hist(dane, bins, histtype='bar', edgecolor='black') # typ histogramu dane i kolor obwodu słupków
+plt.ylim(0, 40) #zakres osi y
+plt.xticks(bins) #aby tak mała przedziałka była widoczna trzeba ją ustalić
+plt.show()
