@@ -203,3 +203,12 @@ plt.ylim(0, 36) #zakres osi y
 plt.title("Długość działki kielicha")
 plt.hist(dane, bins, histtype='bar', edgecolor='black') # typ histogramu dane i kolor obwodu słupków
 plt.show()
+
+dane = allData["Szerokość działki kielicha"]
+bins = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0] #podziałka osi x wyznaczona metoda prob i błędów poki nie znaleziono najlepszej reprezentacji danych
+plt.xlabel("szerokość  (cm)")
+plt.ylabel("liczebność")
+plt.title("szerokość działki kielicha")
+plt.hist(dane, bins, histtype='bar', edgecolor='black') # typ histogramu dane i kolor obwodu słupków
+plt.ylim(0, 75) #zakres osi y
+plt.show()
