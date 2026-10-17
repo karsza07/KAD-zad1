@@ -87,6 +87,23 @@ def point2(arr, total):
         f"maximum: {max(arr['Szerokość płatka'])}\n"
     )
 
+def korelacja_pearsona(x, y):
+    n = len(x)
+    sr_x = sum(x) / n
+    sr_y = sum(y) / n
+    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y))
+    mianownik = math.sqrt(sum((xi - sr_x)**2 for xi in x) * sum((yi - sr_y)**2 for yi in y))
+    return licznik / mianownik if mianownik != 0 else 0.0
+def regresja_liniowa(x, y):
+    n = len(x)
+    sr_x = sum(x) / n
+    sr_y = sum(y) / n
+    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y))
+    mianownik = sum((xi - sr_x)**2 for xi in x)
+    a = licznik / mianownik
+    b = sr_y - a * sr_x
+    return a, b
+
 flowersInTotal = 150
 setosaTotal = 0
 versicolorTotal = 0
@@ -274,22 +291,7 @@ for i,cfg in enumerate(konfiguracja_cech):
 
 plt.savefig("wykres_zad3.png", dpi=300, bbox_inches='tight')
 plt.show()
-def korelacja_pearsona(x, y):
-    n = len(x)
-    sr_x = sum(x) / n
-    sr_y = sum(y) / n
-    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y))
-    mianownik = math.sqrt(sum((xi - sr_x)**2 for xi in x) * sum((yi - sr_y)**2 for yi in y))
-    return licznik / mianownik if mianownik != 0 else 0.0
-def regresja_liniowa(x, y):
-    n = len(x)
-    sr_x = sum(x) / n
-    sr_y = sum(y) / n
-    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y))
-    mianownik = sum((xi - sr_x)**2 for xi in x)
-    a = licznik / mianownik
-    b = sr_y - a * sr_x
-    return a, b
+
 
 pary_cech = list(itertools.combinations([c["Klucz"] for c in konfiguracja_cech], 2))
 fig2, axes2 = plt.subplots(nrows=3, ncols=2, figsize=(12, 15))
