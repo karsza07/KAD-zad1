@@ -2,6 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 import math
 import itertools
+
 def mediana(arr):
     s=sorted(arr)
     num = len(s)
@@ -172,9 +173,7 @@ allData = {
 print("dane łącznie dla wszystkich gatunków:")
 point2(allData, flowersInTotal)
 
-
-
-dane = allData["Długość działki kielicha"]
+"""dane = allData["Długość działki kielicha"]
 bins = [4.0, 4.4, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0] 
 plt.xlabel("Długość  (cm)")
 plt.ylabel("liczebność")
@@ -209,9 +208,11 @@ plt.title("szerokość płatka")
 plt.hist(dane, bins, histtype='bar', edgecolor='black')
 plt.ylim(0, 40) 
 plt.xticks(bins) 
-plt.show()
+plt.show()"""
+#tutaj wszystko było generowane pojedynczo wiec nastapila automatyzacja
 
 #kontunuowałem od tego momentu karola
+#czemu robisz tyle literowek chlopie
 konfiguracja_cech= [
     {
         "Nazwa":"Długość działki kielicha",
@@ -232,7 +233,7 @@ konfiguracja_cech= [
     {
         "Nazwa": "Długość płatka",
         "Klucz": "Długość płatka",
-        "Kednostka": "Długość",
+        "Jednostka": "Długość",
         "podzialki": [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0],
         "hist": (0, 32),
         "box": (0.8, 7.2)
@@ -246,17 +247,13 @@ konfiguracja_cech= [
         "box": (0.0, 2.7)
     }
 ]
+
 gatunki_etykiety = ["setosa", "versicolor", "virginica"]
 fig1,axes1=plt.subplots(nrows=4,ncols=2,figsize=(10,14))
-plt.subplots_adjust(h=0.45,w=0.25)
+plt.subplots_adjust(hspace=0.45,wspace=0.25)
 for i,cfg in enumerate(konfiguracja_cech):
     ax_hist=axes1[i,0]
-    ax_box=axes1[i.1]
-    klucz=cfg[klucz]
-
-    for i, cfg in enumerate(konfiguracja_cech):
-    ax_hist = axes1[i, 0]
-    ax_box = axes1[i, 1]
+    ax_box=axes1[i,1]
     klucz = cfg["Klucz"]
 
     ax_hist.hist(allData[klucz], bins=cfg["podzialki"], edgecolor='black')
@@ -274,6 +271,7 @@ for i,cfg in enumerate(konfiguracja_cech):
     ax_box.set_xlabel("Gatunek")
     ax_box.set_ylabel(cfg["Jednostka"])
     ax_box.set_ylim(cfg["box"])
+
 plt.savefig("wykres_zad3.png", dpi=300, bbox_inches='tight')
 plt.show()
 def korelacja_pearsona(x, y):
@@ -292,6 +290,7 @@ def regresja_liniowa(x, y):
     a = licznik / mianownik
     b = sr_y - a * sr_x
     return a, b
+
 pary_cech = list(itertools.combinations([c["Klucz"] for c in konfiguracja_cech], 2))
 fig2, axes2 = plt.subplots(nrows=3, ncols=2, figsize=(12, 15))
 axes2 = axes2.flatten()
