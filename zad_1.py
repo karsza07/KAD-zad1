@@ -215,7 +215,7 @@ plt.show()"""
 #czemu robisz tyle literowek chlopie
 konfiguracja_cech= [
     {
-        "Nazwa":"Długość działki kielicha",
+        #"Nazwa":"Długość działki kielicha",
         "Klucz":"Długość działki kielicha",
         "Jednostka":"Długość",
         "podzialki":[4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0],
@@ -223,7 +223,7 @@ konfiguracja_cech= [
         "box":(4,8)
     },
     {
-        "Nazwa":"Szerokość działki kielicha",
+        #"Nazwa":"Szerokość działki kielicha",
         "Klucz":"Szerokość działki kielicha",
         "Jednostka":"Szerokość",
         "podzialki":[2.0,2.5,3.0,3.5,4.0,4.5],
@@ -231,7 +231,7 @@ konfiguracja_cech= [
         "box":(1.8,4.6)        
     },
     {
-        "Nazwa": "Długość płatka",
+        #"Nazwa": "Długość płatka", nazwa jest taka sama jak klucz??? po co jest nazwa?
         "Klucz": "Długość płatka",
         "Jednostka": "Długość",
         "podzialki": [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0],
@@ -239,7 +239,7 @@ konfiguracja_cech= [
         "box": (0.8, 7.2)
     },
     {
-        "Nazwa": "Szerokość płatka",
+        #"Nazwa": "Szerokość płatka",
         "Klucz": "Szerokość płatka",
         "Jednostka": "Szerokość",
         "podzialki": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6],
@@ -257,7 +257,7 @@ for i,cfg in enumerate(konfiguracja_cech):
     klucz = cfg["Klucz"]
 
     ax_hist.hist(allData[klucz], bins=cfg["podzialki"], edgecolor='black')
-    ax_hist.set_title(cfg["Nazwa"])
+    ax_hist.set_title(cfg["Klucz"])
     ax_hist.set_xlabel(cfg["Jednostka"])
     ax_hist.set_ylabel("Liczebność")
     ax_hist.set_ylim(cfg["hist"])
