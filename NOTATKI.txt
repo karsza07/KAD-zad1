@@ -1,0 +1,30 @@
+JAK INTERPRETOWAĆ HISTOGRAM
+==================================
+
+oś x - dana cecha irysa w cm
+oś y - liczebność kwiatów
+
+Zwróćym uwage na pojedynczy słupek na wykresie.
+Powiedzmy że jego szerokość (zakres) to od 5 do 5.5 a liczebność (wysokość)
+to 30. Oznacza to że 30 kwiatów ma zakres danej cechy od 5 do 5.5
+
+
+=================================
+JAK INTERPRETOWAĆ WYKRES PUDEŁKOWY
+=================================
+
+samo pudełko stanowi przedział w którym znajduje się 
+50% wszystkich wartości, a więc środek pudełka jest to mediana
+(jest to oczywiście przybliżony środek pudełka u nas jest to pomarańczowa linia)
+
+Dolna połowa pudełka jest to 1 kwartyl, górna to 3 kwartyl
+(2 kwartyl jest to po prostu mediana)
+
+Linie które odchodzą od pudełka w góre lub w dół (razem)
+stanowią drugie 50% wszystkich wartości. Co oznacza że linia w dól to 25%
+oraz linia w góre to 25%. UWAGA: jest tak tylko w przypadku jeśli nie ma wartości odstających.
+WArtości odstające są to kropki poniżej lub powyżej wykresu.
+
+Powiedzmy że długość samego pudełka jest od 10 do 19. To znaczy że 50%
+irysów przymje wartość dla danej cechy od 10 do 19. 
+

@@ -130,6 +130,7 @@ virginicaData = {
     "Szerokość płatka": []
 }
 
+#import ddanuch do słownika
 with open("data1.csv", "r") as f:
     reader = csv.reader(f)
     for row in reader:
@@ -154,7 +155,7 @@ setosaTotal = len(setosaData["Długość działki kielicha"])
 versicolorTotal = len(versicolorData["Długość działki kielicha"])
 virginicaTotal = len(virginicaData["Długość działki kielicha"])
 
-setosaProcent = round(setosaTotal / flowersInTotal * 100, 1)
+setosaProcent = round(setosaTotal / flowersInTotal * 100, 1) #wartości procentowe
 versicolorProcent = round(versicolorTotal / flowersInTotal * 100, 1)
 virginicaProcent = round(virginicaTotal / flowersInTotal * 100, 1)
 
@@ -190,47 +191,13 @@ allData = {
 print("dane łącznie dla wszystkich gatunków:")
 point2(allData, flowersInTotal)
 
-"""dane = allData["Długość działki kielicha"]
-bins = [4.0, 4.4, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0] 
-plt.xlabel("Długość  (cm)")
-plt.ylabel("liczebność")
-plt.ylim(0, 36) 
-plt.title("Długość działki kielicha")
-plt.hist(dane, bins, histtype='bar', edgecolor='black') 
-plt.show()
-
-dane = allData["Szerokość działki kielicha"]
-bins = [2.0, 2.5, 3.0, 3.5, 4.0, 4.5]
-plt.xlabel("szerokość  (cm)")
-plt.ylabel("liczebność")
-plt.title("szerokość działki kielicha")
-plt.hist(dane, bins, histtype='bar', edgecolor='black')
-plt.ylim(0, 75) 
-plt.show()
-
-dane = allData["Długość płatka"]
-bins = [1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0] 
-plt.xlabel("długość  (cm)")
-plt.ylabel("liczebność")
-plt.title("długość płatka")
-plt.hist(dane, bins, histtype='bar', edgecolor='black') 
-plt.ylim(0, 30) 
-plt.show()
-
-dane = allData["Szerokość płatka"]
-bins = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6]
-plt.xlabel("szerokość (cm)")
-plt.ylabel("liczebność")
-plt.title("szerokość płatka")
-plt.hist(dane, bins, histtype='bar', edgecolor='black')
-plt.ylim(0, 40) 
-plt.xticks(bins) 
-plt.show()"""
-#tutaj wszystko było generowane pojedynczo wiec nastapila automatyzacja
 
 #kontunuowałem od tego momentu karola
 #czemu robisz tyle literowek chlopie
-konfiguracja_cech= [
+
+#wczesniej tutaj byl kazdy wykres rysowany osobno stad wiadomo jakie są najlepsze podziałki dla wykresów
+#teraz jest jedna pętla dla każdego histogramu
+konfiguracja_cech= [ #dane dla wykresów, tablica słowników
     {
         #"Nazwa":"Długość działki kielicha",
         "Klucz":"Długość działki kielicha",
@@ -264,35 +231,40 @@ konfiguracja_cech= [
         "box": (0.0, 2.7)
     }
 ]
+#histogramy i pudełkowe
+
 
 gatunki_etykiety = ["setosa", "versicolor", "virginica"]
-fig1,axes1=plt.subplots(nrows=4,ncols=2,figsize=(10,14))
-plt.subplots_adjust(hspace=0.45,wspace=0.25)
+fig1,axes1=plt.subplots(nrows=4,ncols=2,figsize=(10,14)) #tworzenie siatki do rysowania wykresów 4 rzedy 2 kolumny, rozmiar całego okna to 10 na 14 (w calach)
+plt.subplots_adjust(hspace=0.45,wspace=0.25) #odległosci miedzy kolejnymi wykresami na siatce
 for i,cfg in enumerate(konfiguracja_cech):
-    ax_hist=axes1[i,0]
-    ax_box=axes1[i,1]
+    ax_hist=axes1[i,0] #wykres z wiersza i kolumny 0, miejsce dla hisotgramu
+    ax_box=axes1[i,1] #wykres z wiersza i kolumny 1, miejse dla pudełkowego
     klucz = cfg["Klucz"]
 
-    ax_hist.hist(allData[klucz], bins=cfg["podzialki"], edgecolor='black')
-    ax_hist.set_title(cfg["Klucz"])
-    ax_hist.set_xlabel(cfg["Jednostka"])
-    ax_hist.set_ylabel("Liczebność")
-    ax_hist.set_ylim(cfg["hist"])
+    #tworzenie histogramu
+    ax_hist.hist(allData[klucz], bins=cfg["podzialki"], edgecolor='black') #rysowanie histogramu dla danych z tablicy, bins to podziałki
+    ax_hist.set_title(cfg["Klucz"]) #ustawienie tytułu
+    ax_hist.set_xlabel(cfg["Jednostka"]) #label dla osi x
+    ax_hist.set_ylabel("Liczebność")  #label dla osi y
+    ax_hist.set_ylim(cfg["hist"]) #zakres osi pionowej y
 
+    #tworzenie wykresów pudełkowych
     pudelka = [
-        setosaData[klucz],
+        setosaData[klucz], #trzy zbiory, jeden dla każdego gatunku
         versicolorData[klucz],
         virginicaData[klucz]
     ]
-    ax_box.boxplot(pudelka, tick_labels=gatunki_etykiety)
-    ax_box.set_xlabel("Gatunek")
-    ax_box.set_ylabel(cfg["Jednostka"])
-    ax_box.set_ylim(cfg["box"])
+
+    ax_box.boxplot(pudelka, tick_labels=gatunki_etykiety) #rysuje wykres dla danych z tabeli, ustawia etykiety pod pudelkami
+    ax_box.set_xlabel("Gatunek") #label dla osi x
+    ax_box.set_ylabel(cfg["Jednostka"]) #label dla osi y
+    ax_box.set_ylim(cfg["box"]) #zakres osi y
 
 plt.savefig("wykres_zad3.png", dpi=300, bbox_inches='tight')
 plt.show()
 
-
+#reszta wykresów
 pary_cech = list(itertools.combinations([c["Klucz"] for c in konfiguracja_cech], 2))
 fig2, axes2 = plt.subplots(nrows=3, ncols=2, figsize=(12, 15))
 axes2 = axes2.flatten()
