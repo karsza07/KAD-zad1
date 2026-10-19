@@ -193,9 +193,6 @@ print("dane łącznie dla wszystkich gatunków:")
 point2(allData, flowersInTotal)
 
 
-#kontunuowałem od tego momentu karola
-#czemu robisz tyle literowek chlopie
-
 #wczesniej tutaj byl kazdy wykres rysowany osobno stad wiadomo jakie są najlepsze podziałki dla wykresów
 #teraz jest jedna pętla dla każdego histogramu
 konfiguracja_cech= [ #dane dla wykresów, tablica słowników
@@ -257,7 +254,9 @@ for i,cfg in enumerate(konfiguracja_cech):
         virginicaData[klucz]
     ]
 
+
     ax_box.boxplot(pudelka, tick_labels=gatunki_etykiety) #rysuje wykres dla danych z tabeli, ustawia etykiety pod pudelkami
+    ax_box.set_title(cfg["Klucz"]) #ustawienie tytułu
     ax_box.set_xlabel("Gatunek") #label dla osi x
     ax_box.set_ylabel(cfg["Jednostka"]) #label dla osi y
     ax_box.set_ylim(cfg["box"]) #zakres osi y
