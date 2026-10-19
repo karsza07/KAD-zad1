@@ -88,20 +88,21 @@ def point2(arr, total):
     )
 
 def korelacja_pearsona(x, y):
-    n = len(x)
+    n = len(x) #liczba punktów pomiarowych
     sr_x = sum(x) / n
-    sr_y = sum(y) / n
-    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y))
-    mianownik = math.sqrt(sum((xi - sr_x)**2 for xi in x) * sum((yi - sr_y)**2 for yi in y))
+    sr_y = sum(y) / n #srednie arytemtyczne dla obu wartosci
+    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y)) #suma iloczynow odchylen punktow od sredniej
+    mianownik = math.sqrt(sum((xi - sr_x)**2 for xi in x) * sum((yi - sr_y)**2 for yi in y)) #iloczyn sum kwadratów odchyleń pod pierwiastkiem
     return licznik / mianownik if mianownik != 0 else 0.0
-def regresja_liniowa(x, y):
+
+def regresja_liniowa(x, y): #obliczanie wwspolczynnikow
     n = len(x)
     sr_x = sum(x) / n
     sr_y = sum(y) / n
-    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y))
-    mianownik = sum((xi - sr_x)**2 for xi in x)
-    a = licznik / mianownik
-    b = sr_y - a * sr_x
+    licznik = sum((xi - sr_x) * (yi - sr_y) for xi, yi in zip(x, y)) # to amo co w korelacji
+    mianownik = sum((xi - sr_x)**2 for xi in x) #oblicza sumę kwadratów odchyleń zmiennej x od jej średniej
+    a = licznik / mianownik #wspolczynnik a
+    b = sr_y - a * sr_x #wspolczynnik b
     return a, b
 
 flowersInTotal = 150
@@ -265,25 +266,25 @@ plt.savefig("wykres_zad3.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 #reszta wykresów
-pary_cech = list(itertools.combinations([c["Klucz"] for c in konfiguracja_cech], 2))
-fig2, axes2 = plt.subplots(nrows=3, ncols=2, figsize=(12, 15))
-axes2 = axes2.flatten()
+pary_cech = list(itertools.combinations([c["Klucz"] for c in konfiguracja_cech], 2)) #wszystkie możliwe pary cech
+fig2, axes2 = plt.subplots(nrows=3, ncols=2, figsize=(12, 15)) #ustawienie pól dla wszystkich wykresów
+axes2 = axes2.flatten() #przekształca macierz wykresów w jednowymiarową liste
 plt.subplots_adjust(hspace=0.45, wspace=0.3)
 for idx, (cecha_x, cecha_y) in enumerate(pary_cech):
-    ax = axes2[idx]
-    x = allData[cecha_x]
-    y = allData[cecha_y]
+    ax = axes2[idx] #wybieranie pola na wykres
+    x = allData[cecha_x] #seria danych z allData dla osi x
+    y = allData[cecha_y] #seria danych z all data dla osi y
     r = korelacja_pearsona(x, y)
     a, b = regresja_liniowa(x, y)
-    ax.scatter(x, y, color='blue', edgecolors='black', alpha=0.6, label='Pomiary')
-    x_min, x_max = min(x), max(x)
+    ax.scatter(x, y, color='blue', edgecolors='black', alpha=0.6, label='Pomiary') #rysowanie punktów danych, o przezroczystosci 0.6
+    x_min, x_max = min(x), max(x) #skrajne wartości osi x
     ax.plot([x_min, x_max], [a * x_min + b, a * x_max + b], color='red', linewidth=2, label='Regresja')
-    znak = "+" if b >= 0 else "-"
+    znak = "+" if b >= 0 else "-"  #ustawianie znaku dla regresji liniowej
     ax.set_title(f"r = {r:.2f}, y = {a:.1f}x {znak} {abs(b):.1f}", fontsize=11, fontweight='bold')
     ax.set_xlabel(f"{cecha_x} (cm)", fontsize=9)
     ax.set_ylabel(f"{cecha_y} (cm)", fontsize=9)
-    ax.grid(True, linestyle='--', alpha=0.6)
-    ax.legend(loc='upper left', fontsize=8)
+    ax.grid(True, linestyle='--', alpha=0.6) #siatka półprzezroczysta dla łatwiejszego odczytania danych
+    ax.legend(loc='upper left', fontsize=8) #legenda w lewym górnym rogu
 
 plt.savefig("wykres_zad4.png", dpi=300, bbox_inches='tight')
 plt.show()
