@@ -1,7 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
-import math
-import itertools
+import math #do liczenia sumy itd
+import itertools #d iterowania wydajnie
 
 def mediana(arr):
     s=sorted(arr)
@@ -264,7 +264,7 @@ for i,cfg in enumerate(konfiguracja_cech):
 plt.savefig("wykres_zad3.png", dpi=300, bbox_inches='tight')
 plt.show()
 
-#reszta wykresów
+#reszta wykresow
 pary_cech = list(itertools.combinations([c["Klucz"] for c in konfiguracja_cech], 2)) #wszystkie możliwe pary cech
 fig2, axes2 = plt.subplots(nrows=3, ncols=2, figsize=(12, 15)) #ustawienie pól dla wszystkich wykresów
 axes2 = axes2.flatten() #przekształca macierz wykresów w jednowymiarową liste
