@@ -202,7 +202,7 @@ konfiguracja_cech= [ #dane dla wykresów, tablica słowników
         "Klucz":"Długość działki kielicha",
         "Jednostka":"Długość",
         "podzialki":[4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0],
-        "hist":(0,36),
+        "hist":(0,40),
         "box":(4,8)
     },
     {
@@ -210,7 +210,7 @@ konfiguracja_cech= [ #dane dla wykresów, tablica słowników
         "Klucz":"Szerokość działki kielicha",
         "Jednostka":"Szerokość",
         "podzialki":[2.0,2.5,3.0,3.5,4.0,4.5],
-        "hist":(0,75),
+        "hist":(0,80),
         "box":(1.8,4.6)        
     },
     {
@@ -242,6 +242,7 @@ for i,cfg in enumerate(konfiguracja_cech):
 
     #tworzenie histogramu
     ax_hist.hist(allData[klucz], bins=cfg["podzialki"], edgecolor='black') #rysowanie histogramu dla danych z tablicy, bins to podziałki
+    ax_hist.grid(True, axis='y', linestyle='--', alpha=0.7)
     ax_hist.set_title(cfg["Klucz"]) #ustawienie tytułu
     ax_hist.set_xlabel(cfg["Jednostka"]) #label dla osi x
     ax_hist.set_ylabel("Liczebność")  #label dla osi y
