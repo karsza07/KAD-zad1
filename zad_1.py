@@ -110,7 +110,7 @@ setosaTotal = 0
 versicolorTotal = 0
 virginicaTotal = 0
 
-setosaData = {
+setosaData = {  #utworzenie słowników
     "Długość działki kielicha": [],
     "Szerokość działki kielicha": [],
     "Długość płatka": [],
@@ -132,12 +132,12 @@ virginicaData = {
 }
 
 #import ddanuch do słownika
-with open("data1.csv", "r") as f:
-    reader = csv.reader(f)
-    for row in reader:
-        number = row[-1].strip()
+with open("data1.csv", "r") as f: #otiwera plik w trybie do oczty jako f
+    reader = csv.reader(f) #dzieli każda linie na kolumny do odczytania
+    for row in reader: #dla każdej kolumny w rzędzie
+        number = row[-1].strip()  #sprawdza numer odpowiadający gatunkowi
         if number == "0":
-            setosaData["Długość działki kielicha"].append(float(row[0]))
+            setosaData["Długość działki kielicha"].append(float(row[0])) #odpowiednie wartości trafiają do odpowiednich kluczy
             setosaData["Szerokość działki kielicha"].append(float(row[1]))
             setosaData["Długość płatka"].append(float(row[2]))
             setosaData["Szerokość płatka"].append(float(row[3]))
@@ -166,7 +166,7 @@ print(f"Udzialy (%): Setosa: {setosaProcent}%, Versicolor: {versicolorProcent}%,
 print(" ")
 
 
-allData = {
+allData = { #słownik zawierający wszystko
     "Długość działki kielicha": (
             setosaData["Długość działki kielicha"]
             + versicolorData["Długość działki kielicha"]
