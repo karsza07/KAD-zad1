@@ -7,14 +7,14 @@ def mediana(arr):
     s=sorted(arr)
     num = len(s)
     if num % 2 != 0:
-        return s[(num-1)//2]
+        return s[(num-1)//2] #zwraca środkową wartośc
     else:
-        return round((s[(num-1)//2]+s[num//2])/2, 2)
+        return round((s[(num-1)//2]+s[num//2])/2, 2) #srednia środkowych wartości jesli parzyste
 
 def dolnyKwartyl(arr):
     s=sorted(arr)
     mid = len(s) // 2
-    return mediana(s[0:mid])
+    return mediana(s[0:mid]) #mediana dolnej połowy
 
 def gornyKwartyl(arr):
     s=sorted(arr)
@@ -25,16 +25,17 @@ def gornyKwartyl(arr):
     else:
         start = mid
 
-    return mediana(s[start:])
+    return mediana(s[start:]) #mediana górnej połowy
 
 def odchylenie(lista):
     n = len(lista)
-    if n < 2:
+    if n < 2: #jak ma mniej niz 2 elementy nie mozna obliczyc odchylenia
         return 0.0
     sr = sum(lista) / n
-    wariancja = sum((x - sr) ** 2 for x in lista) / (n - 1)
-    return round(wariancja**0.5, 2)
+    wariancja = sum((x - sr) ** 2 for x in lista) / (n - 1) #suma kwadroatów różnucy kazddego elemnetu od sredniej podzielone na n-1 elementow
+    return round(wariancja**0.5, 2) #pierwiastek z wariancji to dochylenie, zaokrąglenie do dwóch miejsc po przecinku
 
+#to jest do przepisania do sprawka
 def point2(arr, total):
     print(" długość działki kielicha: ")
     print(
@@ -231,7 +232,6 @@ konfiguracja_cech= [ #dane dla wykresów, tablica słowników
 ]
 #histogramy i pudełkowe
 
-
 gatunki_etykiety = ["setosa", "versicolor", "virginica"]
 fig1,axes1=plt.subplots(nrows=4,ncols=2,figsize=(10,14)) #tworzenie siatki do rysowania wykresów 4 rzedy 2 kolumny, rozmiar całego okna to 10 na 14 (w calach)
 plt.subplots_adjust(hspace=0.45,wspace=0.25) #odległosci miedzy kolejnymi wykresami na siatce
@@ -277,7 +277,8 @@ for idx, (cecha_x, cecha_y) in enumerate(pary_cech):
     a, b = regresja_liniowa(x, y)
     ax.scatter(x, y, color='blue', edgecolors='black', alpha=0.6, label='Pomiary') #rysowanie punktów danych, o przezroczystosci 0.6
     x_min, x_max = min(x), max(x) #skrajne wartości osi x
-    ax.plot([x_min, x_max], [a * x_min + b, a * x_max + b], color='red', linewidth=2, label='Regresja')
+    ax.plot([x_min, x_max], [a * x_min + b, a * x_max + b], color='red', linewidth=2, label='Regresja') #rysuje prosta regresji
+    #poczatek to xmin, koniec to x max, y jest obliczany za pomocą współczynników  z funkcji wyżej
     znak = "+" if b >= 0 else "-"  #ustawianie znaku dla regresji liniowej
     ax.set_title(f"r = {r:.2f}, y = {a:.1f}x {znak} {abs(b):.1f}", fontsize=11, fontweight='bold')
     ax.set_xlabel(f"{cecha_x} (cm)", fontsize=9)
