@@ -255,7 +255,6 @@ for i,cfg in enumerate(konfiguracja_cech):
         virginicaData[klucz]
     ]
 
-
     ax_box.boxplot(pudelka, tick_labels=gatunki_etykiety) #rysuje wykres dla danych z tabeli, ustawia etykiety pod pudelkami
     ax_box.set_title(cfg["Klucz"]) #ustawienie tytułu
     ax_box.set_xlabel("Gatunek") #label dla osi x
