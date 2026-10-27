@@ -269,6 +269,8 @@ pary_cech = list(itertools.combinations([c["Klucz"] for c in konfiguracja_cech],
 fig2, axes2 = plt.subplots(nrows=3, ncols=2, figsize=(12, 15)) #ustawienie pól dla wszystkich wykresów
 axes2 = axes2.flatten() #przekształca macierz wykresów w jednowymiarową liste
 plt.subplots_adjust(hspace=0.45, wspace=0.3)
+axes2 = axes2.flatten() #przekształca macierz wykresów w jednowymiarową liste
+plt.subplots_adjust(hspace=0.45, wspace=0.3)
 for idx, (cecha_x, cecha_y) in enumerate(pary_cech):
     ax = axes2[idx] #wybieranie pola na wykres
     x = allData[cecha_x] #seria danych z allData dla osi x
